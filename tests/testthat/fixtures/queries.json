@@ -1,0 +1,17 @@
+[
+  {
+    "name": "gridcells",
+    "connection": "oe_local",
+    "query_file": "fixtures/sql/gridcells.sql"
+  },
+  {
+    "name": "plots",
+    "connection": "oe_local",
+    "query_file": "fixtures/sql/plots.sql"
+  },
+  {
+    "name": "species_per_sector",
+    "connection": "oe_foreign",
+    "query_file": "fixtures/sql/species_per_sector.sql"
+  }
+]

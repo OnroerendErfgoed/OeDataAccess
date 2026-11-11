@@ -1,0 +1,12 @@
+[
+  {
+    "name": "gridcells",
+    "connection": "oe_local",
+    "query_file": "fixtures/sql/gridcells.sql"
+  },
+  {
+    "name": "plots",
+    "connection": "oe_local",
+    "query_file": "fixtures/sql/does_not_exist.sql"
+  }
+]

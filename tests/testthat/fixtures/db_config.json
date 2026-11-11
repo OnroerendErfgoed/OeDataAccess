@@ -1,0 +1,17 @@
+[
+  {
+    "name": "oe_local",
+    "dbname": "oe_inventaris",
+    "hostname": "localhost"
+  },
+  {
+    "name": "oe_foreign",
+    "dbname": "oe_geopunt",
+    "hostname": "db.example.com"
+  },
+  {
+    "name": "oe_archive",
+    "dbname": "oe_archive",
+    "hostname": "archive.example.com"
+  }
+]
