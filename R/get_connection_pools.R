@@ -21,24 +21,24 @@
 #'
 #' @export
 get_pool <- function(poolname, config) {
-    if ("username" %in% colnames(config)) {
-        username <- config$username[config$name == poolname]
-        password <- config$password[config$name == poolname]
-    } else {
-        if (keyring_is_locked()) {
-            keyring_unlock(password = getPass())
-        }
-        username <- key_get("oe_db_username")
-        password <- key_get("oe_db_password")
+  if ("username" %in% colnames(config)) {
+    username <- config$username[config$name == poolname]
+    password <- config$password[config$name == poolname]
+  } else {
+    if (keyring_is_locked()) {
+      keyring_unlock(password = getPass())
     }
+    username <- key_get("oe_db_username")
+    password <- key_get("oe_db_password")
+  }
 
-    dbPool(
-        drv = RPostgreSQL::PostgreSQL(),
-        dbname = config$dbname[config$name == poolname],
-        host = config$hostname[config$name == poolname],
-        user = username,
-        password = password
-    )
+  dbPool(
+    drv = RPostgreSQL::PostgreSQL(),
+    dbname = config$dbname[config$name == poolname],
+    host = config$hostname[config$name == poolname],
+    user = username,
+    password = password
+  )
 }
 
 #' Set up database connection pools
@@ -73,24 +73,27 @@ get_pool <- function(poolname, config) {
 #' @importFrom keyring keyring_is_locked keyring_unlock key_get
 #' @importFrom getPass getPass
 get_connection_pools <- function(config) {
-    pools <- list()
-    for (name in config$name) {
-        tryCatch(
-            {
-                pools[[name]] <- get_pool(name, config)
-            },
-            error = function(e) {
-                # close pools created before this one failed, so no connections
-                # are left open on the database server side
-                for (pool in pools) {
-                    poolClose(pool)
-                }
-                stop("Failed to set up connection pool for '", name, "': ",
-                    conditionMessage(e),
-                    call. = FALSE
-                )
-            }
+  pools <- list()
+  for (name in config$name) {
+    tryCatch(
+      {
+        pools[[name]] <- get_pool(name, config)
+      },
+      error = function(e) {
+        # close pools created before this one failed, so no connections
+        # are left open on the database server side
+        for (pool in pools) {
+          poolClose(pool)
+        }
+        stop(
+          "Failed to set up connection pool for '",
+          name,
+          "': ",
+          conditionMessage(e),
+          call. = FALSE
         )
-    }
-    return(pools)
+      }
+    )
+  }
+  pools
 }

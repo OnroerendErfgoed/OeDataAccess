@@ -31,23 +31,31 @@
 #' config <- get_config(
 #'   qry_cfg = "config/queries.json",
 #'   db_cfg = "config/db_config.json",
-#'   queries = "gridcells"
+#'   queries = c("example_query_name")
 #' )
 #' datasets <- get_datasets(config)
 #' }
 #'
 #' @export
 #' @importFrom jsonlite read_json
-get_config <- function(qry_cfg = "config/queries.json",
-                       db_cfg = "config/db_config.json",
-                       queries = c()) {
+get_config <- function(
+  qry_cfg = "config/queries.json",
+  db_cfg = "config/db_config.json",
+  queries = c()
+) {
   qry_conf <- read_json(qry_cfg, simplifyVector = TRUE)
   db_conf <- read_json(db_cfg, simplifyVector = TRUE)
 
+  # check for duplicate queries
   if (anyDuplicated(qry_conf$name)) {
     duplicated_names <- unique(qry_conf$name[duplicated(qry_conf$name)])
-    stop("Duplicate query name(s) in ", qry_cfg, ": ",
-         paste(duplicated_names, collapse = ", "), call. = FALSE)
+    stop(
+      "Duplicate query name(s) in ",
+      qry_cfg,
+      ": ",
+      paste(duplicated_names, collapse = ", "),
+      call. = FALSE
+    )
   }
 
   config <- list()
@@ -55,27 +63,43 @@ get_config <- function(qry_cfg = "config/queries.json",
   if (length(queries) > 0) {
     unknown <- setdiff(queries, qry_conf$name)
     if (length(unknown) > 0) {
-      warning("Unknown query name(s), not defined in ", qry_cfg, ": ",
-              paste(unknown, collapse = ", "), call. = FALSE)
+      warning(
+        "Unknown query name(s), not defined in ",
+        qry_cfg,
+        ": ",
+        paste(unknown, collapse = ", "),
+        call. = FALSE
+      )
     }
     config$qry_cfg <- subset(qry_conf, name %in% queries)
   } else {
     config$qry_cfg <- qry_conf
   }
 
+  # Check for missing conncections
   missing_connections <- setdiff(config$qry_cfg$connection, db_conf$name)
   if (length(missing_connections) > 0) {
-    stop("Undefined database connection(s) in ", qry_cfg, ": ",
-         paste(missing_connections, collapse = ", "), call. = FALSE)
+    stop(
+      "Undefined database connection(s) in ",
+      qry_cfg,
+      ": ",
+      paste(missing_connections, collapse = ", "),
+      call. = FALSE
+    )
   }
 
-  missing_files <- config$qry_cfg$query_file[!file.exists(config$qry_cfg$query_file)]
+  # Check for missing SQL files
+  missing_files <-
+    config$qry_cfg$query_file[!file.exists(config$qry_cfg$query_file)]
   if (length(missing_files) > 0) {
-    stop("SQL file(s) not found: ",
-         paste(missing_files, collapse = ", "), call. = FALSE)
+    stop(
+      "SQL file(s) not found: ",
+      paste(missing_files, collapse = ", "),
+      call. = FALSE
+    )
   }
 
   config$db_cfg <- subset(db_conf, name %in% config$qry_cfg$connection)
 
-  return(config)
+  config
 }

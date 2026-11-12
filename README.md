@@ -34,7 +34,7 @@ install_github('OnroerendErfgoed/OeDataAccess')
 ```r
 library(OeDataAccess)
 
-queries <- c('query1', 'query2')
+queries <- c("query1","query2")
 
 #config takes a qry_cfg and db_cfg file, but defaults to
 # `config/queries.json` and `config/db_config.json`
@@ -43,4 +43,13 @@ config <- get_config()
 datasets <- get_datasets(config, queries)
 
 head(datasets$query1)
+````
+
+To get started quickly, you can generate a config template in
+the default location in an interactive R session:
+
+```r
+library(OeDataAcces)
+
+setup_config()
 ````

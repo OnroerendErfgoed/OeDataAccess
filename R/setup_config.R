@@ -61,8 +61,11 @@ setup_config <- function() {
 
   existing <- c(qry_cfg, db_cfg)[file.exists(c(qry_cfg, db_cfg))]
   if (length(existing) > 0) {
-    stop("Config file(s) already exist, refusing to overwrite: ",
-         paste(existing, collapse = ", "), call. = FALSE)
+    stop(
+      "Config file(s) already exist, refusing to overwrite: ",
+      paste(existing, collapse = ", "),
+      call. = FALSE
+    )
   }
 
   if (!dir.exists("config")) {
@@ -72,10 +75,16 @@ setup_config <- function() {
   writeLines(queries_template, qry_cfg)
   writeLines(db_config_template, db_cfg)
 
-  message("Configuration files written:\n",
-          "* ", qry_cfg, "\n",
-          "* ", db_cfg, "\n",
-          "Edit them before calling `get_config()`.")
+  message(
+    "Configuration files written:\n",
+    "* ",
+    qry_cfg,
+    "\n",
+    "* ",
+    db_cfg,
+    "\n",
+    "Edit them before calling `get_config()`."
+  )
 
   invisible(list(qry_cfg = qry_cfg, db_cfg = db_cfg))
 }

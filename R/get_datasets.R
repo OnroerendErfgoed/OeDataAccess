@@ -44,19 +44,35 @@ get_datasets <- function(config) {
 
     pool <- pools[[connection]]
     if (is.null(pool)) {
-      stop("No connection pool available for query '", name,
-           "': connection '", connection, "' is not defined in the database config.",
-           call. = FALSE)
+      stop(
+        "No connection pool available for query '",
+        name,
+        "': connection '",
+        connection,
+        "' is not defined in the database config.",
+        call. = FALSE
+      )
     }
 
-    tryCatch({
-      datasets[[name]] <- dbGetQuery(pool, read_file(query_file))
-    }, error = function(e) {
-      stop("Query '", name, "' failed (connection: ", connection,
-           ", file: ", query_file, "): ", conditionMessage(e),
-           call. = FALSE)
-    })
+    tryCatch(
+      {
+        datasets[[name]] <- dbGetQuery(pool, read_file(query_file))
+      },
+      error = function(e) {
+        stop(
+          "Query '",
+          name,
+          "' failed (connection: ",
+          connection,
+          ", file: ",
+          query_file,
+          "): ",
+          conditionMessage(e),
+          call. = FALSE
+        )
+      }
+    )
   }
 
-  return(datasets)
+  datasets
 }
