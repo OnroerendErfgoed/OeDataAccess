@@ -2,4 +2,4 @@ url: https://onroerenderfgoed.github.io/OeDataAccess/
 template:
   bootstrap: 5
   light-switch: true
-
+  bootswatch: lux
