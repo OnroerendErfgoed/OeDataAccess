@@ -1,7 +1,7 @@
 Package: OeDataAccess
 Type: Package
 Title: Data Access Helper functions for fetching data from multiple PostGreSQL databases
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person(
       "Onroerend Erfgoed",
