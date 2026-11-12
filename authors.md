@@ -13,12 +13,12 @@
 
 Vermeyen M (2026). *OeDataAccess: Data Access Helper functions for
 fetching data from multiple PostGreSQL databases*. R package version
-0.1.0, <https://onroerenderfgoed.github.io/OeDataAccess/>.
+1.0.0, <https://onroerenderfgoed.github.io/OeDataAccess/>.
 
     @Manual{,
       title = {OeDataAccess: Data Access Helper functions for fetching data from multiple PostGreSQL databases},
       author = {Maarten Vermeyen},
       year = {2026},
-      note = {R package version 0.1.0},
+      note = {R package version 1.0.0},
       url = {https://onroerenderfgoed.github.io/OeDataAccess/},
     }

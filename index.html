@@ -21,7 +21,7 @@
 
     <a class="navbar-brand me-2" href="index.html">OeDataAccess</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,9 +82,9 @@
 <span></span>
 <span><span class="co">#config takes a qry_cfg and db_cfg file, but defaults to</span></span>
 <span><span class="co"># `config/queries.json` and `config/db_config.json`</span></span>
-<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_config.html">get_config</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_config.html">get_config</a></span><span class="op">(</span>queries <span class="op">=</span> <span class="va">queries</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_datasets.html">get_datasets</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">queries</span><span class="op">)</span></span>
+<span><span class="va">datasets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_datasets.html">get_datasets</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">datasets</span><span class="op">$</span><span class="va">query1</span><span class="op">)</span></span></code></pre></div>
 <p>To get started quickly, you can generate a config template in the default location in an interactive R session:</p>

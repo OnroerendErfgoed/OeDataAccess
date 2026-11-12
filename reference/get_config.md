@@ -54,7 +54,7 @@ if (FALSE) { # \dontrun{
 config <- get_config(
   qry_cfg = "config/queries.json",
   db_cfg = "config/db_config.json",
-  queries = "gridcells"
+  queries = c("example_query_name")
 )
 datasets <- get_datasets(config)
 } # }
