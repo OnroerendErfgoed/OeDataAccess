@@ -38,9 +38,9 @@ queries <- c("query1","query2")
 
 #config takes a qry_cfg and db_cfg file, but defaults to
 # `config/queries.json` and `config/db_config.json`
-config <- get_config()
+config <- get_config(queries = queries)
 
-datasets <- get_datasets(config, queries)
+datasets <- get_datasets(config)
 
 head(datasets$query1)
 ````
