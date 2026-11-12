@@ -2,5 +2,6 @@ url: https://onroerenderfgoed.github.io/OeDataAccess/
 template:
   bootstrap: 5
   light-switch: true
-  bootswatch: lux
-  pkgdown-nav-height: 100px
+  bslib:
+    bootswatch: lux
+    pkgdown-nav-height: 100px
